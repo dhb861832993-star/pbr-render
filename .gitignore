@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# npm / pnpm
+*.tgz
+pnpm-debug.log*
+
+# editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# local test artifacts (screenshots etc.)
+*.png
+test-*.txt
+shot-*

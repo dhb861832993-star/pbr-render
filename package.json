@@ -1,0 +1,66 @@
+{
+  "name": "pbr-render",
+  "description": "PBR model preview for DeepSeek Harness: render GLB/GLTF game art with physically-based materials, textures, environment lighting, and orbit controls — fence language `pbr3d` + `pbr_render` tool.",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/assets/three.js",
+    "cordis.patch.yml",
+    "README.md",
+    "SKILL.md",
+    "LICENSE",
+    "test-model.glb",
+    "test-tex.glb"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plugin",
+    "pbr",
+    "3d",
+    "gltf",
+    "glb",
+    "game-art",
+    "preview",
+    "texture",
+    "material"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/pbr-render.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/pbr-render#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/pbr-render/issues"
+  },
+  "dependencies": {
+    "three": "^0.185.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "pngjs": "^7.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "node scripts/build.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  }
+}
