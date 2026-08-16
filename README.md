@@ -4,10 +4,28 @@
 
 > 🔌 生态：仓库已挂 `#dsh` · `#dsh-plugin` · `#pbr` · `#gltf` topic，欢迎社区收录。
 
+## 🖼️ 效果展示
+
+同一模型的材质通道检查（点击模式栏实时切换，以下为各模式渲染截图）：
+
+| PBR（完整物理渲染） | 基础色 | 法线 |
+|---|---|---|
+| ![pbr](assets/mode-pbr.png) | ![basecolor](assets/mode-basecolor.png) | ![normal](assets/mode-normal.png) |
+
+| 粗糙度（灰度） | 金属度（灰度） | AO（灰度） |
+|---|---|---|
+| ![roughness](assets/mode-roughness.png) | ![metallic](assets/mode-metallic.png) | ![ao](assets/mode-ao.png) |
+
+| 自发光 | 线框 |
+|---|---|
+| ![emissive](assets/mode-emissive.png) | ![wireframe](assets/mode-wireframe.png) |
+
+> 标量通道（粗糙度/金属度/AO）按 PBR 规范以**灰度**显示——正是游戏引擎（Unity/UE）读取的原始贴图通道数据。
+
 ## ✨ 特性
 
 - **PBR 渲染**：金属/粗糙度/法线/自发光/AO 贴图自动加载（GLB 内嵌或 GLTF 兄弟文件）
-- **材质通道检查**：viewer 顶部模式栏一键切换 —— PBR / 基础色 / 法线 / 粗糙度 / 金属度 / AO / 自发光 / 线框（标量通道以**灰度**显示，符合 PBR 规范）
+- **材质通道检查**：viewer 顶部模式栏一键切换 —— PBR / 基础色 / 法线 / 粗糙度 / 金属度 / AO / 自发光 / 线框
 - **环境光照**：RoomEnvironment IBL + ACES 色调映射，材质反光真实
 - **交互**：拖拽旋转、滚轮缩放、自动旋转、曝光调节
 - **主动触发**：模型发现 3D 模型文件（API 生成/下载/工作区出现）时自动调用 `pbr_render` 工具并渲染预览，无需用户提示
@@ -17,7 +35,7 @@
 
 ```sh
 # GitHub 仓库安装
-dsh plugin --profile web add github:你的用户名/pbr-render
+dsh plugin --profile web add github:dhb861832993-star/pbr-render
 
 # 或本地开发
 pnpm install
