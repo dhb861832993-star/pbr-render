@@ -15,9 +15,18 @@ const PORT = 3456;
 
 const server = createServer(async (req, res) => {
   const url = new URL(req.url ?? "/", `http://${req.headers.host}`);
-  if (url.pathname === "/" || url.pathname === "/test-page.html") {
+  if (url.pathname === "/" || url.pathname === "/test-page.html" || url.pathname === "/shot-page.html") {
     try {
-      const body = await readFile(join(root, "test-page.html"));
+      const file = url.pathname === "/shot-page.html" ? "shot-page.html" : "test-page.html";
+      let body = await readFile(join(root, file), "utf8");
+      // shot-page.html: inject model JSON with the requested viewMode
+      if (file === "shot-page.html") {
+        const mode = url.searchParams.get("mode") ?? "pbr";
+        const model = url.searchParams.get("model") ?? "E:/Deepseek_AI/pbr-render/test-tex.glb";
+        const label = url.searchParams.get("label") ?? mode;
+        const spec = JSON.stringify({ model, autoRotate: false, viewMode: mode, label });
+        body = body.replace("MODEL_JSON", spec.replace(/&/g, "&amp;").replace(/</g, "&lt;"));
+      }
       res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
       res.end(body);
       return;

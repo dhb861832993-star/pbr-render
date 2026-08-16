@@ -12,7 +12,7 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
-# local test artifacts (screenshots etc.)
-*.png
+# local test artifacts (root-level only; assets/ screenshots are kept)
+/*.png
 test-*.txt
 shot-*
