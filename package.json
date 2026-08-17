@@ -44,7 +44,8 @@
     "url": "https://github.com/YOUR_USERNAME/pbr-render/issues"
   },
   "dependencies": {
-    "three": "^0.185.0"
+    "three": "^0.185.0",
+    "fflate": "^0.8.2"
   },
   "devDependencies": {
     "esbuild": "^0.28.0",
