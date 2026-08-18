@@ -26,8 +26,8 @@
 
 - **PBR 渲染**：金属/粗糙度/法线/自发光/AO 贴图自动加载（GLB 内嵌或 GLTF 兄弟文件）
 - **材质通道检查**：viewer 顶部模式栏一键切换 —— PBR / 基础色 / 法线 / 粗糙度 / 金属度 / AO / 自发光 / 线框
-- **环境光照**：RoomEnvironment IBL + ACES 色调映射，材质反光真实
-- **交互**：拖拽旋转、滚轮缩放、自动旋转、曝光调节
+- **真实 HDR 环境光**：内置 5 种 CC0 HDR 环境图（Poly Haven 1K）—— `studio` 棚拍 / `sunset` 黄昏 / `outdoor` 户外 / `sunrise` 日出 / `night` 夜晚，`env` 字段切换，`envBackground` 可显示为背景；未指定时回退程序化 RoomEnvironment。**viewer 顶部有"环境"切换栏，预览时可直接点击换环境**
+- **交互**：拖拽旋转、滚轮缩放、自动旋转、曝光调节、**一键全屏**（右上角 ⛶ 按钮，Fullscreen API + 移动端覆盖层降级）
 - **主动触发**：模型发现 3D 模型文件（API 生成/下载/工作区出现）时自动调用 `pbr_render` 工具并渲染预览，无需用户提示
 - **安全**：文件服务工作区限定 + 扩展名白名单 + 512 MiB 上限
 
@@ -61,8 +61,10 @@ dsh plugin --profile web add link:/path/to/pbr-render
 |---|---|---|---|
 | `model` | string | **必填** | 模型路径（绝对或相对工作区），.glb/.gltf |
 | `autoRotate` | boolean | true | 自动旋转 |
-| `background` | string | `#14161c` | 场景背景色 |
-| `env` | string | studio | 环境光预设 |
+| `background` | string | `#14161c` | 场景背景色（`envBackground:true` 时被 HDR 背景覆盖） |
+| `env` | string | studio | 内置 HDR 环境图：`studio` / `sunset` / `outdoor` / `sunrise` / `night`（CC0, Poly Haven 1K） |
+| `envBackground` | boolean | false | 同时把 HDR 环境图显示为场景背景 |
+| `envIntensity` | number | 1.0 | 环境光照强度（HDR/IBL 亮度） |
 | `exposure` | number | 1.0 | 曝光 0.2–3 |
 | `viewMode` | string | pbr | 初始材质视图 |
 | `label` | string | — | 视图说明文字 |
@@ -81,6 +83,7 @@ dsh plugin --profile web add link:/path/to/pbr-render
 - `lib/index.js` — host 半边：`pbr_render` 工具 + 文件服务路由 + 系统提示段
 - `lib/client.js` — 浏览器半边：DOM 观察 `pbr3d` 围栏 → 按需加载 three 资产 → PBR 渲染
 - `src/three-entry.js` + `scripts/build.mjs` — three.js 引擎打包（esbuild）
+- `lib/assets/env/*.hdr` — 内置 HDR 环境图（CC0, Poly Haven 1K，RGBE 格式）
 - `test-model.glb` / `test-tex.glb` — 演示模型（单色 + 全套贴图）
 
 ## 安全

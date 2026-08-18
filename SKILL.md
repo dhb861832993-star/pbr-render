@@ -35,8 +35,10 @@ description: "Render PBR (physically-based) 3D model previews inline in your rep
 |---|---|---|---|
 | `model` | string | **必填** | 模型路径（绝对或相对工作区），.glb/.gltf/.fbx |
 | `autoRotate` | boolean | true | 模型绕 Y 轴缓慢自转 |
-| `background` | string | `#14161c` | 场景背景色 |
-| `env` | string | studio | 环境光预设（studio/outdoor/neutral） |
+| `background` | string | `#14161c` | 场景背景色（`envBackground:true` 时被 HDR 背景覆盖） |
+| `env` | string | studio | 内置 HDR 环境图：`studio` / `sunset` / `outdoor` / `sunrise` / `night`（CC0, Poly Haven 1K） |
+| `envBackground` | boolean | false | 同时把 HDR 环境图显示为场景背景 |
+| `envIntensity` | number | 1.0 | 环境光照强度（HDR/IBL 亮度） |
 | `exposure` | number | 1.0 | 曝光 0.2–3 |
 | `wireframe` | boolean | false | 线框叠加 |
 | `viewMode` | string | pbr | 初始材质视图（见下方模式列表） |
@@ -61,7 +63,7 @@ description: "Render PBR (physically-based) 3D model previews inline in your rep
 
 ````markdown
 ```pbr3d
-{"model":"E:/generated/robot.glb","autoRotate":true,"exposure":1.2,"label":"API 生成的机器人"}
+{"model":"E:/generated/robot.glb","env":"sunset","envBackground":true,"exposure":1.2,"label":"黄昏下的机器人"}
 ```
 ````
 
@@ -70,5 +72,5 @@ description: "Render PBR (physically-based) 3D model previews inline in your rep
 - **格式**：GLB（贴图内嵌）、GLTF（贴图为兄弟文件）与 FBX（二进制/ASCII v7，内嵌贴图）都支持
 - **贴图**：baseColor/normal/roughness/metallic/AO/emissive 自动加载（GLB/FBX 内嵌或同目录）
 - **交互**：拖拽旋转、滚轮缩放、自动旋转
-- **光照**：环境贴图（IBL）+ ACES 色调映射，PBR 材质反光真实
+- **光照**：内置 HDR 环境图（IBL，`env` 切换）+ ACES 色调映射，PBR 材质反光真实；HDR 加载失败自动回退 RoomEnvironment
 - **限制**：单模型/围栏；文件大小上限 512 MiB；路径必须在工作区内（越权返回错误）；同一模型会话内不重复渲染（除非文件变了或用户再要求）

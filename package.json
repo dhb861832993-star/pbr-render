@@ -13,6 +13,7 @@
     "lib/index.js",
     "lib/client.js",
     "lib/assets/three.js",
+    "lib/assets/env",
     "cordis.patch.yml",
     "README.md",
     "SKILL.md",
@@ -37,11 +38,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/pbr-render.git"
+    "url": "git+https://github.com/dhb861832993-star/pbr-render.git"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/pbr-render#readme",
+  "homepage": "https://github.com/dhb861832993-star/pbr-render#readme",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/pbr-render/issues"
+    "url": "https://github.com/dhb861832993-star/pbr-render/issues"
   },
   "dependencies": {
     "three": "^0.185.0",

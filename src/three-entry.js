@@ -7,7 +7,9 @@
  */
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+// 定制版 FBXLoader：自动升级 Phong/Lambert → Standard 并挂载未连接的 ORM 纹理
+// （AO/Roughness/Metallic 合并图），使粗糙度/金属度/AO 通道与 PBR 渲染可用。
+import { FBXLoader } from "./vendor/FBXLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
